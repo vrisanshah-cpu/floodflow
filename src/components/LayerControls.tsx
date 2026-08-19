@@ -21,7 +21,7 @@ export default function LayerControls({
   const { t } = useLanguage();
 
   return (
-    <div className="absolute right-4 top-20 flex flex-col gap-3 rounded-lg bg-white/95 px-4 py-3 text-sm shadow-lg backdrop-blur">
+    <div className="flex w-56 flex-col gap-3 rounded-lg bg-white/95 px-4 py-3 text-sm shadow-lg backdrop-blur">
       <div>
         <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500">
           {t("layer.primaryLayer")}

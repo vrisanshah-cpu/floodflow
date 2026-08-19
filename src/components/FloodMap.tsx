@@ -56,6 +56,7 @@ export default function FloodMap() {
   const [primaryLayer, setPrimaryLayer] = useState<PrimaryLayer>("compound");
   const [showParking, setShowParking] = useState(false);
   const [showCongestion, setShowCongestion] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(true);
 
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const [reduction, setReduction] = useState(0);
@@ -327,14 +328,26 @@ export default function FloodMap() {
         </div>
       </div>
 
-      <LayerControls
-        primaryLayer={primaryLayer}
-        onPrimaryLayerChange={setPrimaryLayer}
-        showParking={showParking}
-        onShowParkingChange={setShowParking}
-        showCongestion={showCongestion}
-        onShowCongestionChange={setShowCongestion}
-      />
+      <div className="absolute right-4 top-4 flex flex-col items-end gap-2">
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={t("layer.menu")}
+          aria-expanded={menuOpen}
+          className="rounded-lg bg-white/95 px-3 py-2 text-lg leading-none shadow-lg backdrop-blur hover:bg-white"
+        >
+          ☰
+        </button>
+        {menuOpen && (
+          <LayerControls
+            primaryLayer={primaryLayer}
+            onPrimaryLayerChange={setPrimaryLayer}
+            showParking={showParking}
+            onShowParkingChange={setShowParking}
+            showCongestion={showCongestion}
+            onShowCongestionChange={setShowCongestion}
+          />
+        )}
+      </div>
 
       {!caseStudyOpen && (
         <button

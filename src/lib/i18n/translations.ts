@@ -29,6 +29,7 @@ const en = {
   "caseStudy.baseline": "Baseline score",
   "caseStudy.simulated": "Simulated score",
   "language.label": "Language",
+  "layer.menu": "Menu",
 } as const;
 
 export type TranslationKey = keyof typeof en;
@@ -62,6 +63,7 @@ const ms: Record<TranslationKey, string> = {
   "caseStudy.baseline": "Skor asas",
   "caseStudy.simulated": "Skor simulasi",
   "language.label": "Bahasa",
+  "layer.menu": "Menu",
 };
 
 const zh: Record<TranslationKey, string> = {
@@ -93,6 +95,7 @@ const zh: Record<TranslationKey, string> = {
   "caseStudy.baseline": "基准分数",
   "caseStudy.simulated": "模拟分数",
   "language.label": "语言",
+  "layer.menu": "菜单",
 };
 
 const ta: Record<TranslationKey, string> = {
@@ -124,6 +127,7 @@ const ta: Record<TranslationKey, string> = {
   "caseStudy.baseline": "அடிப்படை மதிப்பெண்",
   "caseStudy.simulated": "உருவகப்படுத்தப்பட்ட மதிப்பெண்",
   "language.label": "மொழி",
+  "layer.menu": "மெனு",
 };
 
 const id: Record<TranslationKey, string> = {
@@ -155,6 +159,7 @@ const id: Record<TranslationKey, string> = {
   "caseStudy.baseline": "Skor dasar",
   "caseStudy.simulated": "Skor simulasi",
   "language.label": "Bahasa",
+  "layer.menu": "Menu",
 };
 
 const th: Record<TranslationKey, string> = {
@@ -186,6 +191,7 @@ const th: Record<TranslationKey, string> = {
   "caseStudy.baseline": "คะแนนพื้นฐาน",
   "caseStudy.simulated": "คะแนนจำลอง",
   "language.label": "ภาษา",
+  "layer.menu": "เมนู",
 };
 
 const fil: Record<TranslationKey, string> = {
@@ -217,6 +223,7 @@ const fil: Record<TranslationKey, string> = {
   "caseStudy.baseline": "Batayang iskor",
   "caseStudy.simulated": "Isinimulang iskor",
   "language.label": "Wika",
+  "layer.menu": "Menu",
 };
 
 export const TRANSLATIONS: Record<Locale, Record<TranslationKey, string>> = {
