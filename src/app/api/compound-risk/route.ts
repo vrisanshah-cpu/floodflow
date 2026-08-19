@@ -30,6 +30,13 @@ export async function GET(request: NextRequest) {
     parkingWeight: readWeight(searchParams, "parkingWeight", DEFAULT_RISK_WEIGHTS.parkingWeight),
   };
 
+  const zoneId = searchParams.get("zoneId");
+  const floodReductionRaw = searchParams.get("floodReduction");
+  const floodReduction =
+    zoneId && floodReductionRaw != null && Number.isFinite(Number(floodReductionRaw))
+      ? { zoneId, factor: Number(floodReductionRaw) }
+      : undefined;
+
   const dataDir = path.join(process.cwd(), "public", "data");
 
   const [floodRaw, parkingRaw, congestionRaw] = await Promise.all([
@@ -47,9 +54,12 @@ export async function GET(request: NextRequest) {
     parkingData,
     congestionSegments,
     weights,
+    floodReduction,
   });
 
   return NextResponse.json(grid, {
-    headers: { "Cache-Control": "public, max-age=300" },
+    headers: {
+      "Cache-Control": floodReduction ? "no-store" : "public, max-age=300",
+    },
   });
 }

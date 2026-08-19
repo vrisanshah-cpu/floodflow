@@ -114,4 +114,36 @@ score = floodWeight * floodComponent + congestionWeight * congestionComponent + 
   (`src/lib/config.ts` → `DEFAULT_RISK_WEIGHTS`) and can be overridden per
   request via query params, e.g.
   `/api/compound-risk?floodWeight=0.6&congestionWeight=0.2&parkingWeight=0.2`.
-  This is the hook Phase 3's "what if" slider will call into.
+
+## What-if scenario (Phase 3 — active now)
+
+The same endpoint accepts an optional `zoneId` + `floodReduction` (0–1) pair,
+used by the case-study slider:
+
+```
+/api/compound-risk?zoneId=shah-alam-sri-muda&floodReduction=0.4
+```
+
+This multiplies just that zone's `floodComponent` by `(1 - floodReduction)`
+before scoring — a simple, honest stand-in for "what if this area's
+impervious surface / drainage capacity were improved," not real hydrology.
+The case-study zone is `CASE_STUDY_ZONE_ID` in `src/lib/config.ts`, currently
+pointed at Taman Sri Muda (the Dec 2021 flood).
+
+## Map engine
+
+Leaflet + raw OpenStreetMap tiles (`{s}.tile.openstreetmap.org`) — no API
+key, no cost, no signup. This was a deliberate choice over Mapbox GL JS
+(Mapbox requires a card on file to generate a token). For anything beyond
+demo-scale traffic, OSM's tile usage policy asks that production apps run
+their own tile server or use a paid tile provider — fine for a pitch demo,
+worth revisiting if this becomes a real deployed tool.
+
+## Languages
+
+UI chrome (labels, legend, buttons) is translated via
+`src/lib/i18n/translations.ts` into Malaysia's core languages (Bahasa
+Malaysia — default, English, Chinese, Tamil) plus the languages of its
+closest neighbors (Indonesian, Thai, Filipino). Dataset *content* — flood
+zone notes, road names — is not translated; it stays as sourced (English/
+Malay mix, matching how DID/JPS and OSM data actually reads).

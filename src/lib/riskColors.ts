@@ -9,13 +9,6 @@ export const RISK_COLORS: Record<RiskLevel, string> = {
   extreme: "#dc2626",
 };
 
-export const RISK_LABELS: Record<RiskLevel, string> = {
-  low: "Low",
-  medium: "Medium",
-  high: "High",
-  extreme: "Extreme",
-};
-
 export const RISK_ORDER: RiskLevel[] = ["low", "medium", "high", "extreme"];
 
 // Midpoint numeric value for each bucket, used when a feature has no
@@ -28,7 +21,6 @@ export const RISK_LEVEL_MIDPOINT: Record<RiskLevel, number> = {
   extreme: 0.9,
 };
 
-/** Mapbox GL "match" expression: risk_level -> color. */
 /** Buckets a continuous 0–1 compounding risk score into the same levels
  * used for hand-classified flood data, so one legend/color scale serves
  * both layers. */
@@ -39,16 +31,8 @@ export function scoreToRiskLevel(score: number): RiskLevel {
   return "low";
 }
 
-export const floodFillColorExpression = [
-  "match",
-  ["get", "risk_level"],
-  "low",
-  RISK_COLORS.low,
-  "medium",
-  RISK_COLORS.medium,
-  "high",
-  RISK_COLORS.high,
-  "extreme",
-  RISK_COLORS.extreme,
-  /* default */ "#9ca3af",
-];
+/** risk_level property (string, possibly unrecognized) -> fill/line color. */
+export function riskLevelColor(level: string | undefined): string {
+  if (level && level in RISK_COLORS) return RISK_COLORS[level as RiskLevel];
+  return "#9ca3af";
+}

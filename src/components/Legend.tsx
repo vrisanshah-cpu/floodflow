@@ -1,14 +1,25 @@
-import { RISK_COLORS, RISK_LABELS, RISK_ORDER } from "@/lib/riskColors";
+import { RISK_COLORS, RISK_ORDER } from "@/lib/riskColors";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+import type { TranslationKey } from "@/lib/i18n/translations";
 
 interface Props {
-  title?: string;
+  titleKey: "legend.floodRisk" | "legend.compoundingRisk";
 }
 
-export default function Legend({ title = "Flood Risk" }: Props) {
+const RISK_LABEL_KEYS: Record<(typeof RISK_ORDER)[number], TranslationKey> = {
+  low: "risk.low",
+  medium: "risk.medium",
+  high: "risk.high",
+  extreme: "risk.extreme",
+};
+
+export default function Legend({ titleKey }: Props) {
+  const { t } = useLanguage();
+
   return (
     <div className="pointer-events-none absolute bottom-6 left-4 rounded-lg bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
-        {title}
+        {t(titleKey)}
       </p>
       <ul className="flex flex-col gap-1.5">
         {RISK_ORDER.map((level) => (
@@ -17,7 +28,7 @@ export default function Legend({ title = "Flood Risk" }: Props) {
               className="h-3 w-3 rounded-sm border border-black/10"
               style={{ backgroundColor: RISK_COLORS[level] }}
             />
-            {RISK_LABELS[level]}
+            {t(RISK_LABEL_KEYS[level])}
           </li>
         ))}
       </ul>

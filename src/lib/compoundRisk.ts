@@ -23,6 +23,14 @@ export type CompoundRiskFeatureCollection = GeoJSON.FeatureCollection<
   CompoundRiskCellProperties
 >;
 
+/** A "what if we retrofitted zone X" scenario: multiplies that zone's
+ * flood component by (1 - factor). Not real hydrology — a simple, honest
+ * way to communicate the concept for the demo. */
+export interface FloodReductionScenario {
+  zoneId: string;
+  factor: number; // 0..1
+}
+
 interface ComputeArgs {
   floodData: FloodRiskFeatureCollection;
   parkingData: ParkingFeatureCollection;
@@ -30,6 +38,7 @@ interface ComputeArgs {
   weights: RiskWeights;
   cellSizeKm?: number;
   bufferKm?: number;
+  floodReduction?: FloodReductionScenario;
 }
 
 export function computeCompoundRiskGrid({
@@ -39,6 +48,7 @@ export function computeCompoundRiskGrid({
   weights,
   cellSizeKm = GRID_CELL_SIZE_KM,
   bufferKm = CONGESTION_BUFFER_KM,
+  floodReduction,
 }: ComputeArgs): CompoundRiskFeatureCollection {
   const congestionBuffers = congestionSegments
     .map((seg) => ({
@@ -58,7 +68,10 @@ export function computeCompoundRiskGrid({
 
   for (const floodFeature of floodData.features) {
     const props = floodFeature.properties;
-    const floodComponent = props.risk_score ?? RISK_LEVEL_MIDPOINT[props.risk_level];
+    let floodComponent = props.risk_score ?? RISK_LEVEL_MIDPOINT[props.risk_level];
+    if (floodReduction && floodReduction.zoneId === props.id) {
+      floodComponent *= 1 - Math.min(1, Math.max(0, floodReduction.factor));
+    }
 
     const zoneBbox = turf.bbox(floodFeature) as [number, number, number, number];
     const zoneGrid = turf.squareGrid(zoneBbox, cellSizeKm, { units: "kilometers" });

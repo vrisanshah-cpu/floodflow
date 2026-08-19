@@ -1,14 +1,11 @@
-export const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
-
-export const MAPBOX_STYLE = "mapbox://styles/mapbox/light-v11";
+export const OSM_TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+export const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 // Centered on the Klang River corridor through central KL / Klang Valley.
+// [lat, lon] — Leaflet's coordinate order, not GeoJSON's [lon, lat].
 export const KL_INITIAL_VIEW = {
-  longitude: 101.68,
-  latitude: 3.12,
-  zoom: 11.2,
-  pitch: 0,
-  bearing: 0,
+  center: [3.12, 101.68] as [number, number],
+  zoom: 11,
 };
 
 export const KLANG_VALLEY_BOUNDS: [[number, number], [number, number]] = [
@@ -30,4 +27,13 @@ export const DEFAULT_RISK_WEIGHTS = {
   floodWeight: 0.5,
   congestionWeight: 0.3,
   parkingWeight: 0.2,
+};
+
+// Phase 3 case study: the best-documented flood event in the placeholder
+// dataset (Dec 2021 Klang Valley floods). Must match a feature id in
+// public/data/flood-risk.geojson.
+export const CASE_STUDY_ZONE_ID = "shah-alam-sri-muda";
+export const CASE_STUDY_VIEW = {
+  center: [3.0485, 101.533] as [number, number],
+  zoom: 14,
 };
