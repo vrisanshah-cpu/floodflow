@@ -1,0 +1,143 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "shah-alam-sri-muda",
+        "name": "Taman Sri Muda, Shah Alam",
+        "risk_level": "extreme",
+        "risk_score": 0.95,
+        "notes": "PLACEHOLDER geometry approximating a low-lying residential area along the Klang River that experienced catastrophic flooding in the December 2021 Klang Valley floods, with water levels reported above 2m in some homes.",
+        "source": "Approximate — replace with real DID/JPS flood hazard polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.522, 3.042],
+            [101.544, 3.042],
+            [101.544, 3.055],
+            [101.522, 3.055],
+            [101.522, 3.042]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kl-confluence-dang-wangi",
+        "name": "Klang–Gombak Confluence (Masjid Jamek)",
+        "risk_level": "high",
+        "risk_score": 0.75,
+        "notes": "PLACEHOLDER geometry around the historic confluence of the Klang and Gombak rivers — the namesake 'Kuala Lumpur' (muddy confluence) — a recurring flash-flood point in the city core.",
+        "source": "Approximate — replace with real DID/JPS flood hazard polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.688, 3.142],
+            [101.702, 3.142],
+            [101.702, 3.153],
+            [101.688, 3.153],
+            [101.688, 3.142]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kampung-baru",
+        "name": "Kampung Baru",
+        "risk_level": "medium",
+        "risk_score": 0.5,
+        "notes": "PLACEHOLDER geometry over a low-lying traditional settlement near the Klang River floodplain, north of the city core.",
+        "source": "Approximate — replace with real DID/JPS flood hazard polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.699, 3.159],
+            [101.712, 3.159],
+            [101.712, 3.169],
+            [101.699, 3.169],
+            [101.699, 3.159]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pantai-dalam",
+        "name": "Pantai Dalam / Jalan Klang Lama",
+        "risk_level": "high",
+        "risk_score": 0.8,
+        "notes": "PLACEHOLDER geometry over a stretch of Sungai Klang known for flash flooding after heavy rainfall, adjacent to a major arterial road.",
+        "source": "Approximate — replace with real DID/JPS flood hazard polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.658, 3.103],
+            [101.671, 3.103],
+            [101.671, 3.113],
+            [101.658, 3.113],
+            [101.658, 3.103]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sri-petaling-sungai-besi",
+        "name": "Sri Petaling / Sungai Besi",
+        "risk_level": "medium",
+        "risk_score": 0.45,
+        "notes": "PLACEHOLDER geometry near the Klang–Kerayong confluence in southern KL, a recurring localized flooding area during intense monsoon rainfall.",
+        "source": "Approximate — replace with real DID/JPS flood hazard polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.688, 3.063],
+            [101.702, 3.063],
+            [101.702, 3.074],
+            [101.688, 3.074],
+            [101.688, 3.063]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jalan-tun-razak-pudu",
+        "name": "Jalan Tun Razak / Pudu",
+        "risk_level": "low",
+        "risk_score": 0.2,
+        "notes": "PLACEHOLDER geometry over a drainage-improved arterial corridor with occasional but limited surface ponding.",
+        "source": "Approximate — replace with real DID/JPS flood hazard polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.703, 3.134],
+            [101.716, 3.134],
+            [101.716, 3.144],
+            [101.703, 3.144],
+            [101.703, 3.134]
+          ]
+        ]
+      }
+    }
+  ]
+}

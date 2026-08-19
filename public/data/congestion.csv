@@ -1,0 +1,9 @@
+id,name,congestion_score,notes,lon1,lat1,lon2,lat2
+sri-muda-persiaran-kayangan,Persiaran Kayangan (Taman Sri Muda),0.85,"Manual estimate — gridlock reported as residents evacuated during Dec 2021 flash floods",101.522,3.0475,101.544,3.0475
+kl-jalan-tun-perak,Jalan Tun Perak (Masjid Jamek),0.8,"Manual estimate — dense city-core traffic near LRT/MRT interchange, compounds with confluence flood risk",101.688,3.1478,101.702,3.1478
+kg-baru-jalan-raja-muda,Jalan Raja Muda Musa (Kampung Baru),0.55,"Manual estimate — moderate arterial congestion, redevelopment-era traffic",101.699,3.164,101.712,3.164
+pantai-dalam-jalan-klang-lama,Jalan Klang Lama (Pantai Dalam),0.78,"Manual estimate — known bottleneck corridor parallel to Sungai Klang",101.658,3.108,101.671,3.108
+sri-petaling-jalan-sungai-besi,Jalan Sungai Besi (Sri Petaling),0.6,"Manual estimate — feeder to MEX highway, moderate-high peak congestion",101.688,3.0685,101.702,3.0685
+pudu-jalan-tun-razak,Jalan Tun Razak (Pudu),0.65,"Manual estimate — major ring road, consistently busy but better-drained",101.703,3.139,101.716,3.139
+ampang-hilir-contrast,Jalan Ampang Hilir (low-risk contrast segment),0.25,"Manual estimate — outside flood zones, included for visual contrast",101.72,3.158,101.733,3.158
+mutiara-damansara-contrast,Persiaran Surian (low-risk contrast segment),0.3,"Manual estimate — outside flood zones, included for visual contrast",101.6,3.153,101.613,3.153
