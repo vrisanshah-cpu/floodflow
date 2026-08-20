@@ -58,6 +58,19 @@ export default function FloodMap() {
   const [showCongestion, setShowCongestion] = useState(false);
   const [menuOpen, setMenuOpen] = useState(true);
 
+  // Keyboard shortcut: press M to toggle the layer menu, from anywhere
+  // except while typing in a form field.
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() !== "m" || e.metaKey || e.ctrlKey || e.altKey) return;
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
+      setMenuOpen((v) => !v);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const [reduction, setReduction] = useState(0);
   const [baselineScore, setBaselineScore] = useState<number | null>(null);
@@ -333,6 +346,7 @@ export default function FloodMap() {
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={t("layer.menu")}
           aria-expanded={menuOpen}
+          title={`${t("layer.menu")} (M)`}
           className="rounded-lg bg-white/95 px-3 py-2 text-lg leading-none shadow-lg backdrop-blur hover:bg-white"
         >
           ☰
