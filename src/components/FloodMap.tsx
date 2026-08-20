@@ -57,18 +57,36 @@ export default function FloodMap() {
   const [showParking, setShowParking] = useState(false);
   const [showCongestion, setShowCongestion] = useState(false);
   const [menuOpen, setMenuOpen] = useState(true);
+  const [holdingMenuKey, setHoldingMenuKey] = useState(false);
 
-  // Keyboard shortcut: press M to toggle the layer menu, from anywhere
-  // except while typing in a form field.
+  // Keyboard shortcut: hold M to reveal the layer menu, release to hide it
+  // again — independent of the persistent open/closed state from the ☰
+  // button. Keydown fires repeatedly while a key is held (browser
+  // auto-repeat), so this only acts on the first press (`!e.repeat`) and
+  // relies on keyup to close, rather than toggling on every keydown.
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() !== "m" || e.metaKey || e.ctrlKey || e.altKey) return;
-      const tag = (e.target as HTMLElement)?.tagName;
-      if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
-      setMenuOpen((v) => !v);
+    const isFormField = (target: EventTarget | null) => {
+      const tag = (target as HTMLElement)?.tagName;
+      return tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA";
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat || e.key.toLowerCase() !== "m" || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (isFormField(e.target)) return;
+      setHoldingMenuKey(true);
+    };
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() !== "m") return;
+      setHoldingMenuKey(false);
+    };
+    const onBlur = () => setHoldingMenuKey(false);
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("blur", onBlur);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("blur", onBlur);
+    };
   }, []);
 
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
@@ -345,13 +363,13 @@ export default function FloodMap() {
         <button
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={t("layer.menu")}
-          aria-expanded={menuOpen}
-          title={`${t("layer.menu")} (M)`}
+          aria-expanded={menuOpen || holdingMenuKey}
+          title={`${t("layer.menu")} (hold M)`}
           className="rounded-lg bg-white/95 px-3 py-2 text-lg leading-none shadow-lg backdrop-blur hover:bg-white"
         >
           ☰
         </button>
-        {menuOpen && (
+        {(menuOpen || holdingMenuKey) && (
           <LayerControls
             primaryLayer={primaryLayer}
             onPrimaryLayerChange={setPrimaryLayer}
