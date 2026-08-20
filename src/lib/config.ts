@@ -8,6 +8,16 @@ export const KL_INITIAL_VIEW = {
   zoom: 11,
 };
 
+// Hard-locks panning/zooming to the Klang Valley — this is a Kuala Lumpur
+// pitch demo, not a world map, and users have no reason to scroll off into
+// the Malacca Strait. [[south, west], [north, east]], with generous margin
+// beyond the tight KLANG_VALLEY_BOUNDS below.
+export const KL_MAX_BOUNDS: [[number, number], [number, number]] = [
+  [2.85, 101.35],
+  [3.35, 101.95],
+];
+export const KL_MIN_ZOOM = 10;
+
 export const KLANG_VALLEY_BOUNDS: [[number, number], [number, number]] = [
   [101.55, 2.95], // SW
   [101.78, 3.28], // NE

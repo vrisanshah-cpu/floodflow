@@ -7,6 +7,8 @@ import {
   CASE_STUDY_VIEW,
   CASE_STUDY_ZONE_ID,
   KL_INITIAL_VIEW,
+  KL_MAX_BOUNDS,
+  KL_MIN_ZOOM,
   OSM_ATTRIBUTION,
   OSM_TILE_URL,
 } from "@/lib/config";
@@ -94,6 +96,9 @@ export default function FloodMap() {
     const map = L.map(mapContainerRef.current, {
       center: KL_INITIAL_VIEW.center,
       zoom: KL_INITIAL_VIEW.zoom,
+      minZoom: KL_MIN_ZOOM,
+      maxBounds: KL_MAX_BOUNDS,
+      maxBoundsViscosity: 1.0,
     });
     mapRef.current = map;
 
@@ -336,7 +341,7 @@ export default function FloodMap() {
         </div>
       )}
 
-      <div className="pointer-events-none absolute left-4 top-4 flex flex-col gap-2">
+      <div className="pointer-events-none absolute left-4 top-4 z-[1200] flex flex-col gap-2">
         <div className="pointer-events-auto rounded-lg bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
           <h1 className="text-base font-semibold text-slate-900">{t("app.title")}</h1>
           <p className="text-xs text-slate-500">{t("app.subtitle")}</p>
@@ -346,7 +351,7 @@ export default function FloodMap() {
         </div>
       </div>
 
-      <div className="absolute right-4 top-4 flex flex-col items-end gap-2">
+      <div className="absolute right-4 top-4 z-[1200] flex flex-col items-end gap-2">
         <button
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={t("layer.menu")}
@@ -372,7 +377,7 @@ export default function FloodMap() {
         <button
           onClick={openCaseStudy}
           disabled={!mapReady}
-          className="absolute bottom-6 right-4 rounded-lg bg-white/95 px-4 py-2 text-sm font-medium text-slate-800 shadow-lg backdrop-blur hover:bg-white disabled:opacity-50"
+          className="absolute bottom-6 right-4 z-[1200] rounded-lg bg-white/95 px-4 py-2 text-sm font-medium text-slate-800 shadow-lg backdrop-blur hover:bg-white disabled:opacity-50"
         >
           {t("caseStudy.open")}
         </button>
@@ -394,7 +399,7 @@ export default function FloodMap() {
 
       {hoverInfo && (
         <div
-          className="pointer-events-none absolute z-20 max-w-xs rounded-md bg-slate-900/95 px-3 py-2 text-xs text-white shadow-xl"
+          className="pointer-events-none absolute z-[1300] max-w-xs rounded-md bg-slate-900/95 px-3 py-2 text-xs text-white shadow-xl"
           style={{ left: hoverInfo.x + 14, top: hoverInfo.y + 14 }}
         >
           <p className="font-semibold">{hoverInfo.title}</p>

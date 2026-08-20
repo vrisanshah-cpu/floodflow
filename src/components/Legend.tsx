@@ -17,7 +17,7 @@ export default function Legend({ titleKey }: Props) {
   const { t } = useLanguage();
 
   return (
-    <div className="pointer-events-none absolute bottom-6 left-4 rounded-lg bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
+    <div className="pointer-events-none absolute bottom-6 left-4 z-[1200] rounded-lg bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
         {t(titleKey)}
       </p>

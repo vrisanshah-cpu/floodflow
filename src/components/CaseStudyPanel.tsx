@@ -22,7 +22,7 @@ export default function CaseStudyPanel({
   const { t } = useLanguage();
 
   return (
-    <div className="absolute bottom-6 right-4 z-10 w-80 max-w-[calc(100vw-2rem)] rounded-lg bg-white/95 p-4 text-sm shadow-xl backdrop-blur">
+    <div className="absolute bottom-6 right-4 z-[1200] w-80 max-w-[calc(100vw-2rem)] rounded-lg bg-white/95 p-4 text-sm shadow-xl backdrop-blur">
       <div className="mb-2 flex items-start justify-between gap-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
