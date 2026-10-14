@@ -19,10 +19,13 @@ import Legend from "@/components/Legend";
 import LayerControls from "@/components/LayerControls";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import CaseStudyPanel from "@/components/CaseStudyPanel";
+import LiveConditionsPanel from "@/components/LiveConditionsPanel";
 import type {
   FloodRiskFeatureCollection,
+  LiveRiskResponse,
   ParkingFeatureCollection,
   PrimaryLayer,
+  ZoneLiveReading,
 } from "@/lib/types";
 import type { CompoundRiskFeatureCollection } from "@/lib/compoundRisk";
 
@@ -82,6 +85,46 @@ export default function FloodMap() {
   const [reduction, setReduction] = useState(0);
   const [baselineScore, setBaselineScore] = useState<number | null>(null);
   const [simulatedScore, setSimulatedScore] = useState<number | null>(null);
+
+  // --- live conditions (Open-Meteo) ---
+  const [liveData, setLiveData] = useState<LiveRiskResponse | null>(null);
+  const [liveError, setLiveError] = useState<string | null>(null);
+  const [liveLoading, setLiveLoading] = useState(false);
+
+  // Zone lookups are read from inside Leaflet hover handlers, which are
+  // bound once at layer-creation time and would otherwise capture a stale
+  // snapshot of the live data. Same pattern as tRef above.
+  const liveByZoneRef = useRef<Map<string, ZoneLiveReading>>(new Map());
+  useEffect(() => {
+    liveByZoneRef.current = new Map((liveData?.zones ?? []).map((z) => [z.zoneId, z]));
+  }, [liveData]);
+
+  const loadLiveRisk = useMemo(
+    () => async () => {
+      setLiveLoading(true);
+      setLiveError(null);
+      try {
+        const res = await fetch("/api/live-risk");
+        if (!res.ok) throw new Error(`live-risk responded ${res.status}`);
+        const data: LiveRiskResponse = await res.json();
+        setLiveData(data);
+      } catch (err) {
+        setLiveError(err instanceof Error ? err.message : "Live data unavailable");
+      } finally {
+        setLiveLoading(false);
+      }
+    },
+    [],
+  );
+
+  // Kick off immediately and refresh every 10 minutes — matches the
+  // route's own max-age, so a demo left open overnight never shows a
+  // morning audience yesterday's rain.
+  useEffect(() => {
+    void loadLiveRisk();
+    const id = setInterval(() => void loadLiveRisk(), 10 * 60 * 1000);
+    return () => clearInterval(id);
+  }, [loadLiveRisk]);
 
   // --- init map + load all data sources once ---------------------------
   useEffect(() => {
@@ -159,10 +202,22 @@ export default function FloodMap() {
           }),
         });
         floodLayer.eachLayer((layer) =>
-          attachHover(layer, (p) => ({
-            title: p?.name ?? "Unnamed zone",
-            lines: [`${tRef.current("hover.risk")}: ${p?.risk_level}`, p?.notes].filter(Boolean),
-          })),
+          attachHover(layer, (p) => {
+            const live = p?.id ? liveByZoneRef.current.get(p.id as string) : undefined;
+            return {
+              title: p?.name ?? "Unnamed zone",
+              lines: [
+                `${tRef.current("hover.risk")}: ${p?.risk_level}`,
+                live && live.observedTotalMm != null
+                  ? `${tRef.current("live.rain24h")}: ${live.observedTotalMm} mm` +
+                    (live.extrapolated
+                      ? ` (${live.nearestSampleKm} km — ${tRef.current("live.caveat")})`
+                      : "")
+                  : null,
+                p?.notes,
+              ].filter((l): l is string => Boolean(l)),
+            };
+          }),
         );
         floodLayerRef.current = floodLayer;
 
@@ -348,6 +403,14 @@ export default function FloodMap() {
         </div>
         <div className="pointer-events-auto">
           <LanguageSwitcher />
+        </div>
+        <div className="pointer-events-auto">
+          <LiveConditionsPanel
+            data={liveData}
+            error={liveError}
+            loading={liveLoading}
+            onRefresh={() => void loadLiveRisk()}
+          />
         </div>
       </div>
 

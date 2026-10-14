@@ -30,6 +30,19 @@ const en = {
   "caseStudy.simulated": "Simulated score",
   "language.label": "Language",
   "layer.menu": "Menu",
+  "live.title": "Live conditions",
+  "live.loading": "Fetching live weather…",
+  "live.error": "Live weather unavailable",
+  "live.offline": "Offline — showing static dataset",
+  "live.offlineDetail":
+    "Open-Meteo could not be reached. Risk scores below are the long-run dataset only.",
+  "live.rain24h": "Mean rain (24 h)",
+  "live.peak": "Wettest point",
+  "live.wetZones": "Saturated zones",
+  "live.aqi": "Air quality (AQI)",
+  "live.source": "Open-Meteo, live",
+  "live.refresh": "Refresh live conditions",
+  "live.caveat": "nearest sample",
 } as const;
 
 export type TranslationKey = keyof typeof en;
@@ -64,6 +77,19 @@ const ms: Record<TranslationKey, string> = {
   "caseStudy.simulated": "Skor simulasi",
   "language.label": "Bahasa",
   "layer.menu": "Menu",
+  "live.title": "Keadaan langsung",
+  "live.loading": "Mendapatkan cuaca langsung…",
+  "live.error": "Cuaca langsung tidak tersedia",
+  "live.offline": "Luar talian — memaparkan set data statik",
+  "live.offlineDetail":
+    "Open-Meteo tidak dapat dihubungi. Skor risiko di bawah hanya daripada set data jangka panjang.",
+  "live.rain24h": "Purata hujan (24 j)",
+  "live.peak": "Titik paling basah",
+  "live.wetZones": "Zon tepu",
+  "live.aqi": "Kualiti udara (AQI)",
+  "live.source": "Open-Meteo, langsung",
+  "live.refresh": "Muat semula keadaan langsung",
+  "live.caveat": "sampel terdekat",
 };
 
 const zh: Record<TranslationKey, string> = {
@@ -96,6 +122,18 @@ const zh: Record<TranslationKey, string> = {
   "caseStudy.simulated": "模拟分数",
   "language.label": "语言",
   "layer.menu": "菜单",
+  "live.title": "实时状况",
+  "live.loading": "正在获取实时天气…",
+  "live.error": "实时天气不可用",
+  "live.offline": "离线 — 显示静态数据集",
+  "live.offlineDetail": "无法连接 Open-Meteo。以下风险分数仅来自长期数据集。",
+  "live.rain24h": "平均降雨（24 小时）",
+  "live.peak": "最湿地点",
+  "live.wetZones": "饱和区域",
+  "live.aqi": "空气质量（AQI）",
+  "live.source": "Open-Meteo，实时",
+  "live.refresh": "刷新实时状况",
+  "live.caveat": "最近采样点",
 };
 
 const ta: Record<TranslationKey, string> = {
@@ -128,6 +166,19 @@ const ta: Record<TranslationKey, string> = {
   "caseStudy.simulated": "உருவகப்படுத்தப்பட்ட மதிப்பெண்",
   "language.label": "மொழி",
   "layer.menu": "மெனு",
+  "live.title": "நேரடி நிலைமைகள்",
+  "live.loading": "நேரடி வானிலை பெறப்படுகிறது…",
+  "live.error": "நேரடி வானிலை கிடைக்கவில்லை",
+  "live.offline": "இணைப்பு இல்லை — நிலையான தரவுத்தொகுப்பு காட்டப்படுகிறது",
+  "live.offlineDetail":
+    "Open-Meteo ஐ அணுக முடியவில்லை. கீழேயுள்ள அபாய மதிப்பெண்கள் நீண்டகால தரவுத்தொகுப்பிலிருந்து மட்டுமே.",
+  "live.rain24h": "சராசரி மழை (24 மணி)",
+  "live.peak": "அதிக மழைப் புள்ளி",
+  "live.wetZones": "நிறைந்த மண்டலங்கள்",
+  "live.aqi": "காற்றுத் தரம் (AQI)",
+  "live.source": "Open-Meteo, நேரடி",
+  "live.refresh": "நேரடி நிலைமைகளைப் புதுப்பி",
+  "live.caveat": "அருகிலுள்ள மாதிரி",
 };
 
 const id: Record<TranslationKey, string> = {
@@ -160,6 +211,19 @@ const id: Record<TranslationKey, string> = {
   "caseStudy.simulated": "Skor simulasi",
   "language.label": "Bahasa",
   "layer.menu": "Menu",
+  "live.title": "Kondisi langsung",
+  "live.loading": "Mengambil cuaca langsung…",
+  "live.error": "Cuaca langsung tidak tersedia",
+  "live.offline": "Luring — menampilkan kumpulan data statis",
+  "live.offlineDetail":
+    "Open-Meteo tidak dapat dijangkau. Skor risiko di bawah hanya dari kumpulan data jangka panjang.",
+  "live.rain24h": "Rata-rata hujan (24 j)",
+  "live.peak": "Titik terbasah",
+  "live.wetZones": "Zona jenuh",
+  "live.aqi": "Kualitas udara (AQI)",
+  "live.source": "Open-Meteo, langsung",
+  "live.refresh": "Muat ulang kondisi langsung",
+  "live.caveat": "sampel terdekat",
 };
 
 const th: Record<TranslationKey, string> = {
@@ -192,6 +256,19 @@ const th: Record<TranslationKey, string> = {
   "caseStudy.simulated": "คะแนนจำลอง",
   "language.label": "ภาษา",
   "layer.menu": "เมนู",
+  "live.title": "สภาพปัจจุบัน",
+  "live.loading": "กำลังดึงข้อมูลอากาศปัจจุบัน…",
+  "live.error": "ข้อมูลอากาศปัจจุบันไม่พร้อมใช้",
+  "live.offline": "ออฟไลน์ — แสดงชุดข้อมูลสถิติ",
+  "live.offlineDetail":
+    "ไม่สามารถเชื่อมต่อ Open-Meteo ได้ คะแนนความเสี่ยงด้านล่างมาจากชุดข้อมูลระยะยาวเท่านั้น",
+  "live.rain24h": "ฝนเฉลี่ย (24 ชม.)",
+  "live.peak": "จุดที่ฝนมากที่สุด",
+  "live.wetZones": "พื้นที่อิ่มตัว",
+  "live.aqi": "คุณภาพอากาศ (AQI)",
+  "live.source": "Open-Meteo, ปัจจุบัน",
+  "live.refresh": "รีเฟรชสภาพปัจจุบัน",
+  "live.caveat": "จุดเก็บตัวอย่างใกล้สุด",
 };
 
 const fil: Record<TranslationKey, string> = {
@@ -224,6 +301,19 @@ const fil: Record<TranslationKey, string> = {
   "caseStudy.simulated": "Isinimulang iskor",
   "language.label": "Wika",
   "layer.menu": "Menu",
+  "live.title": "Kasalukuyang kalagayan",
+  "live.loading": "Kinukuha ang live na lagay ng panahon…",
+  "live.error": "Hindi available ang live na lagay ng panahon",
+  "live.offline": "Offline — ipinapakita ang static na dataset",
+  "live.offlineDetail":
+    "Hindi maabot ang Open-Meteo. Ang mga iskor sa ibaba ay mula lamang sa pangmatagalang dataset.",
+  "live.rain24h": "Karaniwang ulan (24 oras)",
+  "live.peak": "Pinakabasang punto",
+  "live.wetZones": "Mga saturated na zone",
+  "live.aqi": "Kalidad ng hangin (AQI)",
+  "live.source": "Open-Meteo, live",
+  "live.refresh": "I-refresh ang kasalukuyang kalagayan",
+  "live.caveat": "pinakamalapit na sample",
 };
 
 export const TRANSLATIONS: Record<Locale, Record<TranslationKey, string>> = {

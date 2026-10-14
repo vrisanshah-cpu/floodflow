@@ -60,3 +60,84 @@ export interface RiskWeights {
   congestionWeight: number;
   parkingWeight: number;
 }
+
+// ---------------------------------------------------------------------
+// Live data layer (Open-Meteo).
+//
+// Everything below is derived at request time from Open-Meteo and is
+// explicitly allowed to be unavailable — the static dataset under
+// public/data/ remains the source of truth for zone geometry and
+// long-run classification. See src/lib/liveRisk.ts.
+// ---------------------------------------------------------------------
+
+/** Rainfall aggregate for one sampling point. */
+export interface LiveRainfall {
+  latitude: number;
+  longitude: number;
+  /** Total precipitation over the observation window, in mm. */
+  totalMm: number;
+  /** Peak hourly precipitation in the window, in mm. */
+  peakHourlyMm: number;
+  /** 0–1 "how wet is the ground" measure. See summarizeForecast(). */
+  saturation: number;
+  /** True when the upstream call failed for this point. */
+  failed?: boolean;
+}
+
+export interface LiveAirQuality {
+  meanAqi: number;
+  peakAqi: number;
+  pm25: number;
+}
+
+/** Per-zone fusion of static classification and live observation. */
+export interface ZoneLiveReading {
+  zoneId: string;
+  zoneName: string;
+  /** The zone's risk_level as shipped in flood-risk.geojson. */
+  staticRiskLevel: RiskLevel;
+  /** Multiplier to apply to the zone's flood component. Always >= 1. */
+  saturationMultiplier: number;
+  observedTotalMm: number | null;
+  observedPeakHourlyMm: number | null;
+  saturation: number;
+  airQuality: LiveAirQuality | null;
+  /** Distance to the sampling point this reading came from, in km. */
+  nearestSampleKm: number | null;
+  /** True when the nearest sample is far enough away to warrant a caveat. */
+  extrapolated: boolean;
+}
+
+export interface LiveRiskResponse {
+  generatedAt: string;
+  source: "Open-Meteo";
+  samplePoints: number;
+  successfulSamples: number;
+  zones: ZoneLiveReading[];
+  summary: {
+    meanTotalMm: number;
+    maxTotalMm: number;
+    meanAqi: number;
+    wetZones: number;
+  };
+}
+
+/** The subset of a forecast the UI renders, independent of the raw API. */
+export interface LiveObservation {
+  totalMm: number;
+  peakHourlyMm: number;
+  saturation: number;
+}
+
+export interface AirQualitySample {
+  meanAqi: number;
+  peakAqi: number;
+  pm25: number;
+}
+
+export interface PrecipitationSample {
+  latitude: number;
+  longitude: number;
+  totalMm: number;
+  peakHourlyMm: number;
+}
